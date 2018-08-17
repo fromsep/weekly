@@ -7,6 +7,10 @@
         td {
             padding: 3px;
         }
+        .rate {
+            height: 25px;
+            background: lightcoral;
+        }
     </style>
 </head>
 <body>
@@ -35,7 +39,7 @@
             <tr>
                 <td>{{$value['title']}}</td>
                 <td>{{$value['schedule']}}</td>
-                <td style="width: 200px;" >&nbsp;&nbsp;&nbsp;&nbsp;{{$value['completion_rate']}}%<div style="width: {{$value['completion_rate']*2}}px; height: 5px; background: red;"></div></td>
+                <td style="width: 200px;" ><div class="rate" style="width:{{$value['completion_rate']*2}}px";>{{$value['completion_rate']}}%</div></td>
                 <td>{{substr($value['review_date'], 0, 10)}}</td>
                 <td>{{substr($value['development_date'], 0, 10)}}</td>
                 <td>{{substr($value['testing_date'], 0, 10)}}</td>
