@@ -49,7 +49,7 @@ class Weekly extends Command
     protected function send() {
         $starDate = date('Y-m-d', time() - 691200);
         $endDate  = date('Y-m-d');
-        $subject  = "{$starDate} - {$endDate} 周报邮件";
+        $subject  = "周报邮件({$starDate} - {$endDate} )";
 
         $toUsers = ['1203081981@qq.com'];
         $data = $this->getAllData($starDate);
@@ -87,7 +87,7 @@ class Weekly extends Command
         $sql = "SELECT a.*,u.`name` `user_name`,u.`group_id`,g.`name` `group_name` FROM `assignment` a
                 LEFT JOIN `Users` u ON u.`id` = a.`user_id`
                 LEFT JOIN `UserGroup` g ON g.`id` = u.`group_id`
-                WHERE a.`delete` = 0 AND a.`status` = 'none' AND a.`create_time` >= {$starDate}
+                WHERE a.`delete` = 0 -- AND a.`status` = 'none' AND a.`create_time` >= {$starDate}
                 ORDER BY a.`user_id` ASC, a.`id` ASC";
 
         $records = DB::select($sql);
