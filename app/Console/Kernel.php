@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
 
+        // 每周一发送周报邮件
         $schedule->command('weekly:post')->mondays()->withoutOverlapping();
     }
 
