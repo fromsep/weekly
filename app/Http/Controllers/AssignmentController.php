@@ -17,7 +17,7 @@ class AssignmentController extends Controller
     }
 
     public function recent() {
-        $records = DB::table('assignment')->where([
+        $records = DB::table('Assignment')->where([
             ['user_id', '=', Auth::id()],
             ['create_time', '>=', date('Y-m-d H:i:s', time() - 604800)]
         ])->orderBy('id', 'desc')
@@ -80,7 +80,7 @@ class AssignmentController extends Controller
 
     public function edit($id)
     {
-        $info = DB::table('assignment')->where([
+        $info = DB::table('Assignment')->where([
             'user_id' => Auth::id(),
             'id'      => $id,
             'delete'  => 0,
@@ -114,7 +114,7 @@ class AssignmentController extends Controller
 
         $params = $request->validate($rules);
 
-        $count = DB::table('assignment')->where([
+        $count = DB::table('Assignment')->where([
             'id'      => $params['id'],
             'user_id' => Auth::id(),
             'delete'  => 0,
@@ -130,14 +130,14 @@ class AssignmentController extends Controller
 
         $params['update_time'] = date('Y-m-d H:i:s');
 
-        DB::table('assignment')->where('id', $id)->update($params);
+        DB::table('Assignment')->where('id', $id)->update($params);
 
         return redirect('assignment/detail/' . $id);
     }
 
     public function delete($id)
     {
-        $count = DB::table('assignment')->where([
+        $count = DB::table('Assignment')->where([
             ['id', '=', $id],
             ['user_id', '=', Auth::id()],
             ['delete', '=', 0],
@@ -147,7 +147,7 @@ class AssignmentController extends Controller
             return redirect(route('assignment.recent'));
         }
 
-        DB::table('assignment')->where('id', $id)->update(['delete' => 1]);
+        DB::table('Assignment')->where('id', $id)->update(['delete' => 1]);
 
         return redirect('assignment/detail/' . $id);
     }

@@ -81,7 +81,7 @@ class Weekly extends Command
 
         // 更改状态
         return DB::transaction(function() use($data) {
-            DB::table('assignment')
+            DB::table('Assignment')
                 ->whereIn('id', $data['ids'])
                 ->update(['status' => 'posted']);
         });

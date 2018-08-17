@@ -43,7 +43,7 @@ class Assignment extends Model
      */
     public static function getUnpostData($starDate) {
         $sql = "SELECT a.*,u.`name` `user_name`,u.`group_id`,g.`name` `group_name` FROM `assignment` a
-                LEFT JOIN `Users` u ON u.`id` = a.`user_id`
+                LEFT JOIN `users` u ON u.`id` = a.`user_id`
                 LEFT JOIN `UserGroup` g ON g.`id` = u.`group_id`
                 WHERE a.`delete` = 0 AND a.`status` = 'none' AND a.`create_time` >= {$starDate}
                 ORDER BY a.`user_id` ASC, a.`id` ASC";
