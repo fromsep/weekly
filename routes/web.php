@@ -27,11 +27,10 @@ Route::middleware(['auth'])->group(function() {
 
 Route::middleware(['auth','checkGroup'])->group(function() {
     Route::get('/', 'AssignmentController@recent');
-
     Route::prefix('assignment')->group(function () {
         Route::get('/', 'AssignmentController@index');
         Route::get('recent', 'AssignmentController@recent')->name('assignment.recent');
-        Route::any('add', 'AssignmentController@add')->name('assignment.add');
+        Route::match(['POST','GET'], 'add', 'AssignmentController@add')->name('assignment.add');
         Route::get('detail/{id}', 'AssignmentController@detail');
         Route::get('edit/{id}', 'AssignmentController@edit');
         Route::post('update', 'AssignmentController@update')->name('assignment.update');

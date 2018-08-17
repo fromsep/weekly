@@ -19,6 +19,8 @@ class AssignmentController extends Controller
     public function recent() {
         $records = DB::table('Assignment')->where([
             ['user_id', '=', Auth::id()],
+            ['delete', '=', 0],
+            ['status', '=', 'none'],
             ['create_time', '>=', date('Y-m-d H:i:s', time() - 604800)]
         ])->orderBy('id', 'desc')
             ->get()
