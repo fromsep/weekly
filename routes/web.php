@@ -16,15 +16,14 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 
-//Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/test', 'HomeController@test');
 
 Auth::routes();
 Route::middleware(['auth'])->group(function() {
     Route::get('group', 'Auth\GroupController@select')->name('group.select');
     Route::post('group/update', 'Auth\GroupController@update')->name('group.update');
 });
-
-//Route::get('/', 'AssignmentController@recent');
 
 Route::middleware(['auth','checkGroup'])->group(function() {
     Route::get('/', 'AssignmentController@recent');

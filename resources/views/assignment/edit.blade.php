@@ -125,6 +125,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="collaborators " class="col-md-4 col-form-label text-md-right">{{ __('其他开发测试人员') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="collaborators" type="text" class="form-control{{ $errors->has('collaborators') ? ' is-invalid' : '' }}" name="collaborators" value="{{ $collaborators }}"  autofocus>
+
+                                @if ($errors->has('collaborators '))
+                                    <span class="launch-feedback" role="alert">
+                                        <strong>{{ $errors->first('collaborators') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="remarks" class="col-md-4 col-form-label text-md-right">{{ __('备注') }}</label>
 
                             <div class="col-md-6">

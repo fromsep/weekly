@@ -40,11 +40,12 @@ class AssignmentController extends Controller
             $rules = [
                 'title'             => 'required|max:32',
                 'schedule'          => 'required|in:planning,reviewing,developing,launched,end',
-                'completion_rate'   => 'required|integer',
+                'completion_rate'   => 'required|integer|max:100',
                 'review_date'       => 'required|date',
                 'development_date'  => 'required|date',
                 'testing_date'      => 'required|date',
                 'launch_date'       => 'required|date',
+                'collaborators'     => '',
                 'remarks'           => '',
             ];
 
@@ -61,7 +62,7 @@ class AssignmentController extends Controller
 
     public function detail($id)
     {
-        $info = DB::table('assignment')->where([
+        $info = DB::table('Assignment')->where([
             'user_id' => Auth::id(),
             'id'      => $id
         ])->get()->toArray();
@@ -73,7 +74,6 @@ class AssignmentController extends Controller
         $record = Assignment::find($id);
 
         $record->schedule = Assignment::$schedules[$record->schedule];
-
 
         return view('assignment.detail', $record);
     }
@@ -103,11 +103,12 @@ class AssignmentController extends Controller
             'id'                => 'required',
             'title'             => 'required|max:32',
             'schedule'          => 'required|in:planning,reviewing,developing,launched,end',
-            'completion_rate'   => 'required|integer',
+            'completion_rate'   => 'required|integer|max:100',
             'review_date'       => 'required|date',
             'development_date'  => 'required|date',
             'testing_date'      => 'required|date',
             'launch_date'       => 'required|date',
+            'collaborators'     => '',
             'remarks'           => '',
         ];
 

@@ -9,7 +9,7 @@ class Assignment extends Model
     const CREATED_AT = 'create_time';
     const UPDATED_AT = 'update_time';
 
-    protected $table = 'assignment';
+    protected $table = 'Assignment';
 
     protected $fillable = [
         'user_id',
@@ -20,6 +20,7 @@ class Assignment extends Model
         'development_date',
         'testing_date',
         'launch_date',
+        'collaborators',
         'remarks',
     ];
 

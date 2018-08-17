@@ -80,7 +80,7 @@
 
 
                         <div class="form-group row">
-                            <label for="development_date" class="col-md-4 col-form-label text-md-right">{{ __('评审日期') }}</label>
+                            <label for="development_date" class="col-md-4 col-form-label text-md-right">{{ __('开发日期') }}</label>
 
                             <div class="col-md-6">
                                 <input id="development_date" type="text" class="form-control{{ $errors->has('development_date') ? ' is-invalid' : '' }}" name="development_date" value="{{ old('development_date') }}" required autofocus>
@@ -117,6 +117,20 @@
                                 @if ($errors->has('testing_date'))
                                     <span class="launch-feedback" role="alert">
                                         <strong>{{ $errors->first('launch_date') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="collaborators " class="col-md-4 col-form-label text-md-right">{{ __('其他开发测试人员') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="collaborators" type="text" class="form-control{{ $errors->has('collaborators') ? ' is-invalid' : '' }}" name="collaborators" value="{{ old('collaborators') }}" required autofocus>
+
+                                @if ($errors->has('collaborators '))
+                                    <span class="launch-feedback" role="alert">
+                                        <strong>{{ $errors->first('collaborators') }}</strong>
                                     </span>
                                 @endif
                             </div>

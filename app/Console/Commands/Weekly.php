@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use App\Assignment;
 
 class Weekly extends Command
 {
@@ -94,6 +95,10 @@ class Weekly extends Command
         $groups = [];
         $ids  = [];
         foreach($records as $value) {
+
+            $value->schedule        = Assignment::$schedules[$value->schedule];
+            $value->collaborators   = $value->user_name . ',' . $value->collaborators;
+
             $groups[$value->group_id]['group_name'] = $value->group_name;
             $groups[$value->group_id]['users'][$value->user_id]['user_name'] = $value->user_name;
             $groups[$value->group_id]['users'][$value->user_id]['list'][] = (array)$value;
