@@ -37,3 +37,62 @@
 ```
 php artisan weekly:post          每周一发送邮件
 ```
+
+### 3. 表
+
+```
+-- 用户表
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `group_id` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '群组id',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- 用户重置密码表
+
+CREATE TABLE `password_resets` (
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+-- 用户群组表
+CREATE TABLE `UserGroup` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` char(16) CHARACTER SET gbk NOT NULL COMMENT '组名',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户群组表';
+
+-- 用户工作任务表
+CREATE TABLE `Assignment` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL COMMENT '用户id',
+  `title` varchar(128) NOT NULL COMMENT '任务',
+  `schedule` enum('planning','reviewing','developing','launched','end') DEFAULT 'planning' COMMENT '进度',
+  `completion_rate` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '完成百分比',
+  `review_date` datetime NOT NULL COMMENT '评审日期',
+  `development_date` datetime NOT NULL COMMENT '开发日期',
+  `testing_date` datetime NOT NULL COMMENT '提测日期',
+  `launch_date` datetime NOT NULL COMMENT '上线日期',
+  `collaborators` varchar(256) DEFAULT '' COMMENT '合作人员',
+  `remarks` varchar(256) DEFAULT NULL COMMENT '备注',
+  `delete` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否删除',
+  `status` enum('posted','none') NOT NULL DEFAULT 'none' COMMENT '状态',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_user_id` (`user_id`) USING BTREE,
+  KEY `idx_create_time` (`create_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='任务表';
+
+```
